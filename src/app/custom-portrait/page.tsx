@@ -110,10 +110,10 @@ export default function CustomPortraitPage() {
                         value={formData.size}
                         onChange={handleChange}
                       >
-                        <option value="small">Small (8x10")</option>
-                        <option value="medium">Medium (16x20")</option>
-                        <option value="large">Large (24x36")</option>
-                        <option value="xlarge">X-Large (30x40")</option>
+                        <option value="small">Small (8x10&quot;)</option>
+                        <option value="medium">Medium (16x20&quot;)</option>
+                        <option value="large">Large (24x36&quot;)</option>
+                        <option value="xlarge">X-Large (30x40&quot;)</option>
                       </Select>
                     </div>
                     <div>
@@ -175,10 +175,10 @@ export default function CustomPortraitPage() {
                 <div>
                   <h3 className="font-semibold mb-2">Size</h3>
                   <ul className="text-sm space-y-1 text-muted-foreground">
-                    <li>Small (8x10"): $199</li>
-                    <li>Medium (16x20"): $399</li>
-                    <li>Large (24x36"): $699</li>
-                    <li>X-Large (30x40"): $999</li>
+                    <li>Small (8x10&quot;): $199</li>
+                    <li>Medium (16x20&quot;): $399</li>
+                    <li>Large (24x36&quot;): $699</li>
+                    <li>X-Large (30x40&quot;): $999</li>
                   </ul>
                 </div>
                 <div>

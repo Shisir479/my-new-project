@@ -85,7 +85,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {product.dimensions && (
                 <div className="mb-2">
                   <span className="font-semibold">Dimensions: </span>
-                  {product.dimensions.width}" × {product.dimensions.height}"
+                  {product.dimensions.width}&quot; × {product.dimensions.height}&quot;
                 </div>
               )}
               
