@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 const abstractArtworks: Product[] = [
   {
     _id: 'abs-1',
-    name: 'Vibrant Chaos',
+    productTitle: 'Vibrant Chaos',
     description: 'An explosion of colors and emotions',
     price: 399.99,
     category: 'abstract',
-    imageUrl: '/images/abstract/abstract-1.jpg',
+    image: '/cuadro-horizontal-1.jpg',
     artist: 'Maria Rodriguez',
     inStock: true,
     featured: true,
@@ -24,11 +24,11 @@ const abstractArtworks: Product[] = [
   },
   {
     _id: 'abs-2',
-    name: 'Fluid Dreams',
+    productTitle: 'Fluid Dreams',
     description: 'Flowing forms and dreamy textures',
     price: 349.99,
     category: 'abstract',
-    imageUrl: '/images/abstract/abstract-2.jpg',
+    image: '/cuadro-horizontal-2.jpg',
     artist: 'James Chen',
     inStock: true,
     featured: false,

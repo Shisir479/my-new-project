@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 const contemporaryArtworks: Product[] = [
   {
     _id: 'con-1',
-    name: 'Urban Reflections',
+    productTitle: 'Urban Reflections',
     description: 'Modern cityscape with bold colors',
     price: 499.99,
     category: 'contemporary',
-    imageUrl: '/images/contemporary/contemporary-1.jpg',
+    image: '/cuadro-horizontal-3.jpg',
     artist: 'Sarah Mitchell',
     inStock: true,
     featured: true,
@@ -24,11 +24,11 @@ const contemporaryArtworks: Product[] = [
   },
   {
     _id: 'con-2',
-    name: 'Silent Voices',
+    productTitle: 'Silent Voices',
     description: 'A contemporary take on portraiture',
     price: 449.99,
     category: 'contemporary',
-    imageUrl: '/images/contemporary/contemporary-2.jpg',
+    image: '/cuadro-horizontal-4.jpg',
     artist: 'David Park',
     inStock: true,
     featured: false,
