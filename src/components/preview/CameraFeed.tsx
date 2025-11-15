@@ -24,8 +24,9 @@ const CameraFeed: React.FC = () => {
 
     return () => {
       // Stop the camera on component unmount
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+      const video = videoRef.current;
+      if (video && video.srcObject) {
+        const tracks = (video.srcObject as MediaStream).getTracks();
         tracks.forEach((track) => track.stop());
       }
     };

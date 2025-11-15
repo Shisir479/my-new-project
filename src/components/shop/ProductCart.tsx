@@ -11,7 +11,7 @@ const ProductCart: React.FC = () => {
   const cart = useAppSelector((state) => state.cart.items);
 
   const handleUpdateQuantity = (id: string, delta: number) => {
-    const product = cart.find((item) => item.id === id);
+    const product = cart.find((item) => item._id === id);
     if (product) {
       const newQuantity = product.quantity + delta;
       if (newQuantity > 0) {
@@ -48,18 +48,18 @@ const ProductCart: React.FC = () => {
 
             <div className="space-y-4">
               {cart.map((item) => (
-                <div key={item.id} className="flex items-center border-b pb-4">
+                <div key={item._id} className="flex items-center border-b pb-4">
                   <div className="relative w-16 h-16 mr-4">
                     <Image
                       src={item.image}
-                      alt={item.name || 'Product Image'}
+                      alt={item.name || item.productTitle || 'Product Image'}
                       fill
                       className="object-cover rounded"
                     />
                   </div>
                   <div className="flex-grow">
                     <p className="text-lg font-medium">
-                      {item.name || 'Unknown'}
+                      {item.name || item.productTitle || 'Unknown'}
                     </p>
                     <p className="text-gray-600">
                       ${isNaN(item.price) ? '0.00' : Number(item.price).toFixed(2)}
@@ -68,14 +68,14 @@ const ProductCart: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <button
                       className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                      onClick={() => handleUpdateQuantity(item.id, -1)}
+                      onClick={() => handleUpdateQuantity(item._id, -1)}
                     >
                       -
                     </button>
                     <p>{item.quantity || 1}</p>
                     <button
                       className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                      onClick={() => handleUpdateQuantity(item.id, 1)}
+                      onClick={() => handleUpdateQuantity(item._id, 1)}
                     >
                       +
                     </button>
@@ -88,7 +88,7 @@ const ProductCart: React.FC = () => {
                   </p>
                   <button
                     className="ml-4 text-red-500 hover:text-red-700"
-                    onClick={() => handleRemoveItem(item.id)}
+                    onClick={() => handleRemoveItem(item._id)}
                   >
                     <MdDeleteForever size={24} />
                   </button>
