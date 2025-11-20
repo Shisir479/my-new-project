@@ -10,12 +10,13 @@ import {
   Maximize2,
   Box,
   X,
-  Smartphone, 
-  Image as ImageIcon
+  Smartphone,
+  Image as ImageIcon,
 } from "lucide-react";
 import DynamicMockup from "./DynamicMockup";
 import { PHONE_MODELS } from "./mockupConfig";
 import LivePreviewARModal from "../preview/LivePreviewARModal";
+import WallPreviewTool from "../preview/RoomPreview";
 
 export default function ProductMockup({
   product,
@@ -28,12 +29,14 @@ export default function ProductMockup({
 
   // AR MODAL STATE
   const [isAROpen, setIsAROpen] = useState(false);
-
+  // WALL PREVIEW STATE (NEW)
+  const [isWallViewOpen, setIsWallViewOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState<string>("ash");
   const [placement, setPlacement] = useState<string>("Center Front");
   const [imageScale, setImageScale] = useState<number>(1);
   const [rotation, setRotation] = useState<number>(0);
-  const [selectedPhoneModel, setSelectedPhoneModel] = useState<string>("iphone16");
+  const [selectedPhoneModel, setSelectedPhoneModel] =
+    useState<string>("iphone16");
 
   const mockupActive = selectedProduct !== "default";
 
@@ -42,7 +45,13 @@ export default function ProductMockup({
       id: "hoodie",
       name: "Hoodies",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M6 20V10l4-3 2 2 2-2 4 3v10H6z" />
           <path d="M10 7V5a2 2 0 1 1 4 0v2" />
         </svg>
@@ -52,7 +61,12 @@ export default function ProductMockup({
       id: "tshirt",
       name: "T-Shirts",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <path d="M4 7l4-2 4 2 4-2 4 2-2 13H6L4 7z" />
         </svg>
       ),
@@ -61,7 +75,12 @@ export default function ProductMockup({
       id: "tank",
       name: "Tank Tops",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <path d="M8 4h2l1 4h2l1-4h2l2 16H6L8 4z" />
         </svg>
       ),
@@ -70,7 +89,12 @@ export default function ProductMockup({
       id: "tote",
       name: "Tote Bags",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <rect x="4" y="9" width="16" height="12" rx="2" />
           <path d="M8 9V7a4 4 0 0 1 8 0v2" />
         </svg>
@@ -80,7 +104,12 @@ export default function ProductMockup({
       id: "pillow",
       name: "Throw Pillows",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <rect x="5" y="6" width="14" height="12" rx="3" />
         </svg>
       ),
@@ -89,7 +118,12 @@ export default function ProductMockup({
       id: "phone",
       name: "Phone Cases",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <rect x="8" y="4" width="8" height="16" rx="2" />
         </svg>
       ),
@@ -98,7 +132,12 @@ export default function ProductMockup({
       id: "mug",
       name: "Mugs",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <rect x="4" y="7" width="10" height="10" rx="2" />
           <path d="M14 9h2a2 2 0 0 1 0 4h-2" />
         </svg>
@@ -108,7 +147,12 @@ export default function ProductMockup({
       id: "puzzle",
       name: "Puzzles",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <path d="M9 4a2 2 0 0 1 4 0v2h3v3h2a2 2 0 1 1 0 4h-2v3h-3v2a2 2 0 1 1-4 0v-2H6v-3H4a2 2 0 1 1 0-4h2V6h3V4z" />
         </svg>
       ),
@@ -117,14 +161,24 @@ export default function ProductMockup({
       id: "ornament",
       name: "Ornaments",
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <path d="M12 20s-6-4-6-8a4 4 0 0 1 8 0 4 4 0 0 1 8 0c0 4-6 8-6 8z" />
         </svg>
       ),
     },
   ];
 
-  const placements = ["Center Front", "Center Back", "Left Chest", "Right Chest"];
+  const placements = [
+    "Center Front",
+    "Center Back",
+    "Left Chest",
+    "Right Chest",
+  ];
 
   const toggleSection = (section: string) => {
     if (activeSection === section) {
@@ -142,26 +196,30 @@ export default function ProductMockup({
 
   return (
     <div className="min-h-screen bg-white">
-      
       {/* AR MODAL COMPONENT */}
       <LivePreviewARModal
-        isOpen={isAROpen} 
-        onClose={() => setIsAROpen(false)} 
-        imageSrc={product.image} 
+        isOpen={isAROpen}
+        onClose={() => setIsAROpen(false)}
+        imageSrc={product.image}
       />
-
+      {/* WALL PREVIEW TOOL (NEW) */}
+      <WallPreviewTool
+        isOpen={isWallViewOpen}
+        onClose={() => setIsWallViewOpen(false)}
+        productImage={product.image}
+      />
       {/* CLICK TO ENLARGE MODAL */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4">
-          <button 
-            onClick={() => setIsModalOpen(false)} 
+          <button
+            onClick={() => setIsModalOpen(false)}
             className="absolute top-5 right-5 text-white hover:text-gray-300"
           >
             <X size={40} />
           </button>
-          <img 
-            src={product.image} 
-            alt="Enlarged Product" 
+          <img
+            src={product.image}
+            alt="Enlarged Product"
             className="max-w-full max-h-full object-contain"
           />
         </div>
@@ -169,11 +227,9 @@ export default function ProductMockup({
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-          
           {/* LEFT SIDE : PREVIEW */}
           {/* Sticky only on medium screens and up (md:sticky). Relative on mobile to fix overlap issue. */}
           <div className="relative md:sticky md:top-4 flex flex-col items-center w-full z-10">
-            
             {/* REMOVED GlassMagnifier & Adjusted Styles for Mobile Full View */}
             <div className="w-full relative mb-2 flex items-center justify-center rounded-lg bg-white">
               {!mockupActive && (
@@ -203,7 +259,7 @@ export default function ProductMockup({
 
             {/* Click to Enlarge Text */}
             {!mockupActive && (
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="text-xs text-gray-500 underline hover:text-black mb-6 flex items-center gap-1"
               >
@@ -214,39 +270,66 @@ export default function ProductMockup({
             {/* Action Icons */}
             <div className="flex flex-wrap justify-center gap-4 md:gap-8 w-full border-t border-gray-200 pt-6 bg-white pb-2">
               {!mockupActive && (
-                <button 
+                <button
                   onClick={() => setIsAROpen(true)}
                   className="flex flex-col items-center gap-2 text-gray-500 hover:text-black transition group"
                 >
-                  <Video className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                  <span className="text-[10px] md:text-[11px] uppercase tracking-wide">Live AR</span>
+                  <Video
+                    className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform"
+                    strokeWidth={1.5}
+                  />
+                  <span className="text-[10px] md:text-[11px] uppercase tracking-wide">
+                    Live AR
+                  </span>
                 </button>
               )}
 
               {!mockupActive && (
-                <button className="flex flex-col items-center gap-2 text-gray-500 hover:text-black transition group">
-                  <ImageIcon className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                  <span className="text-[10px] md:text-[11px] uppercase tracking-wide">Wall View</span>
+                <button
+                  onClick={() => setIsWallViewOpen(true)} // TRIGGER WALL PREVIEW
+                  className="flex flex-col items-center gap-2 text-gray-500 hover:text-black transition group"
+                >
+                  <ImageIcon
+                    className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform"
+                    strokeWidth={1.5}
+                  />
+                  <span className="text-[10px] md:text-[11px] uppercase tracking-wide">
+                    Wall View
+                  </span>
                 </button>
               )}
 
               <button className="flex flex-col items-center gap-2 text-gray-500 hover:text-black transition group">
-                <Box className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                <span className="text-[10px] md:text-[11px] uppercase tracking-wide">360° View</span>
+                <Box
+                  className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform"
+                  strokeWidth={1.5}
+                />
+                <span className="text-[10px] md:text-[11px] uppercase tracking-wide">
+                  360° View
+                </span>
               </button>
 
               <button className="flex flex-col items-center gap-2 text-gray-500 hover:text-black transition group">
-                <Heart className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                <span className="text-[10px] md:text-[11px] uppercase tracking-wide">Save</span>
+                <Heart
+                  className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform"
+                  strokeWidth={1.5}
+                />
+                <span className="text-[10px] md:text-[11px] uppercase tracking-wide">
+                  Save
+                </span>
               </button>
 
               <button className="flex flex-col items-center gap-2 text-gray-500 hover:text-black transition group">
-                <Mail className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                <span className="text-[10px] md:text-[11px] uppercase tracking-wide">Share</span>
+                <Mail
+                  className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform"
+                  strokeWidth={1.5}
+                />
+                <span className="text-[10px] md:text-[11px] uppercase tracking-wide">
+                  Share
+                </span>
               </button>
             </div>
-
-          </div> 
+          </div>
           {/* End of Left Wrapper */}
 
           {/* RIGHT SIDE : CONTROLS */}
@@ -255,12 +338,16 @@ export default function ProductMockup({
               {product.title ?? "Product Title"}
             </h1>
             <div className="mb-6">
-              <div className="text-3xl md:text-4xl font-light mb-2">${product.price}</div>
+              <div className="text-3xl md:text-4xl font-light mb-2">
+                ${product.price}
+              </div>
             </div>
 
             {/* QUANTITY + ADD TO CART (Stacked Layout) */}
             <div className="md:flex flex-col gap-4 mb-8">
-              <label className="text-sm font-medium text-gray-700">Quantity</label>
+              <label className="text-sm font-medium text-gray-700">
+                Quantity
+              </label>
               <input
                 type="number"
                 defaultValue={1}
